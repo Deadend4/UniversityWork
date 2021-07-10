@@ -17,7 +17,7 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TForm1 *Form1;
-int mode, CheckMode=0, i1 = 0;
+int mode, CheckMode=0, i1 = 0, matMode = 0;
 double T0[50][50];
 int iii[10], jjj[10];
 using namespace std;
@@ -60,10 +60,10 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 			ProgressBar1->Position--;
 	}
 	ofstream output("output.txt");
-	double T1[50][50], C, po, Ld, q[50][50], t; //T0[50][50]
+	double T1[50][50], C, po, Ld, q[50][50], t, po2, C2; //T0[50][50]
     float h, h2;
     double dt, tv, to, it, ep, SelectTime;
-    int i,j, n, m, ii, jj, mode, pl = -1;
+	int i,j, n, m, ii, jj, mode, pl = -1;
     double gamT, sumq;
     setlocale(LC_ALL, "RUS");
     SetConsoleCP(1521);
@@ -71,11 +71,11 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	for (i = 0; i <= 42; i++)
 			for (j = 0; j <= 42; j++) {
 				//T0[i][j] = 0;
-				  if (j == 0) {    //верхняя граница
+				  if (j == 0) {    //РІРµСЂС…РЅСЏСЏ РіСЂР°РЅРёС†Р°
 					T0[i][j] = StrToFloat(Form1->Edit9->Text);
 					T1[i][j] = T0[i][j];
 				  }
-				  if (i == 42) {   //правая граница
+				  if (i == 42) {   //РїСЂР°РІР°СЏ РіСЂР°РЅРёС†Р°
 					T0[i][j] = StrToFloat(Form1->Edit11->Text);
 					T1[i][j] = T0[i][j];
 				  }
@@ -91,18 +91,18 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 				}
 	SelectTime = StrToFloat(Form1->Edit7->Text);
 	to = StrToFloat(Form1->Edit1->Text);
-	//cout << "До: "; cin >> tv;
+	//cout << "Р”Рѕ: "; cin >> tv;
 	tv = StrToFloat(Form1->Edit2->Text);
 	if (SelectTime != -1) {
        tv = SelectTime;
 	}
 	ii = StrToInt(Form1->Edit3->Text);
 	jj = StrToInt(Form1->Edit4->Text);
-    n = 41; // 0 и 42 элементы - клетки среды
+    n = 41; // 0 Рё 42 СЌР»РµРјРµРЅС‚С‹ - РєР»РµС‚РєРё СЃСЂРµРґС‹
 	m = 41;
 	T0[ii][jj] = StrToInt(Form1->Edit15->Text); //278
 			if ((to == 0)&&(SelectTime==-1)) {
-			output << to << " секунда:"<< endl;
+			output << to << " СЃРµРєСѓРЅРґР°:"<< endl;
 			for (i = 0; i <= (n+1); i++)
 			{
 				for (j = 0; j <= (m+1); j++)
@@ -110,19 +110,21 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 				output << endl;
 			}
 		}
-	Memo1->Lines->Append("Точка ("+IntToStr(ii)+", "+IntToStr(jj)+") поджигается тепловым импульсом и повышает температуру на "+T0[ii][jj]+" градусов.");
+	Memo1->Lines->Append("РўРѕС‡РєР° ("+IntToStr(ii)+", "+IntToStr(jj)+") РїРѕРґР¶РёРіР°РµС‚СЃСЏ С‚РµРїР»РѕРІС‹Рј РёРјРїСѓР»СЊСЃРѕРј Рё РїРѕРІС‹С€Р°РµС‚ С‚РµРјРїРµСЂР°С‚СѓСЂСѓ РЅР° "+T0[ii][jj]+" РіСЂР°РґСѓСЃРѕРІ.");
 	if (SelectTime >= 0 ) {
-		Memo1->Lines->Append("Вывод результатов на " + FloatToStr(SelectTime)+ " секунде.");
+		Memo1->Lines->Append("Р’С‹РІРѕРґ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ РЅР° " + FloatToStr(SelectTime)+ " СЃРµРєСѓРЅРґРµ.");
 	}  else
 	{
-        Memo1->Lines->Append("Вывод результатов на временном промежутке от "+FloatToStr(to)+" до "+FloatToStr(tv)+".");
-    }
+        Memo1->Lines->Append("Р’С‹РІРѕРґ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ РЅР° РІСЂРµРјРµРЅРЅРѕРј РїСЂРѕРјРµР¶СѓС‚РєРµ РѕС‚ "+FloatToStr(to)+" РґРѕ "+FloatToStr(tv)+".");
+	}
 	dt = 0.005;
 	it = 0.0;
 	//po = 1500;
 	po = StrToFloat(Form1->Edit5->Text);
 	//C = 1000;
-    C = StrToFloat(Form1->Edit6->Text);
+	C = StrToFloat(Form1->Edit6->Text);
+	po2 = StrToFloat(Form1->Edit16->Text);
+    C2 = StrToFloat(Form1->Edit17->Text);
 	h = 0.001;
     h2 = h*h;
 	Ld = 1;
@@ -133,7 +135,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		mode = 2;
 	int Ch1, Ch2, Ch3, Ch4;
     bool bleft, bright, dleft, dright;
-	//вывод всех элементов матрицы в файлик, надо оформить функцию вывода.
+	//РІС‹РІРѕРґ РІСЃРµС… СЌР»РµРјРµРЅС‚РѕРІ РјР°С‚СЂРёС†С‹ РІ С„Р°Р№Р»РёРє, РЅР°РґРѕ РѕС„РѕСЂРјРёС‚СЊ С„СѓРЅРєС†РёСЋ РІС‹РІРѕРґР°.
 	for (double it = 1.0; it <= tv+dt; it = it + dt)
 	{
 		pl++;
@@ -149,28 +151,41 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 				Ch3 = (T0[i][j-1] - T0[i][j])/(h*h);
 				Ch4 = (T0[i][j+1] - T0[i][j])/(h*h);
 				if (mode == 1) {
-					T1[i][j] = T0[i][j] + (Ld*dt/(C*po))*(Ch1+Ch2+Ch3+Ch4+gamm(T0[i][j])/(h*h));
+					if ((j > 20) && (matMode == 1)) {
+						T1[i][j] = T0[i][j] + (Ld*dt/(C2*po2))*(Ch1+Ch2+Ch3+Ch4+gamm(T0[i][j])/(h*h));
+					} else {
+						T1[i][j] = T0[i][j] + (Ld*dt/(C*po))*(Ch1+Ch2+Ch3+Ch4+gamm(T0[i][j])/(h*h));
+                    }
+
 				}
 				if (mode == 2) {
-					T1[i][j] = T0[i][j] + (Ld*dt/(C*po))*(Ch1+Ch2+Ch3+Ch4+gamm3(T0[i][j])/(h*h));
+					if ((j > 20) && (matMode == 1)) {
+						T1[i][j] = T0[i][j] + (Ld*dt/(C2*po2))*(Ch1+Ch2+Ch3+Ch4+gamm3(T0[i][j])/(h*h));
+					} else {
+						T1[i][j] = T0[i][j] + (Ld*dt/(C*po))*(Ch1+Ch2+Ch3+Ch4+gamm3(T0[i][j])/(h*h));
+                    }
 				}
 				if (Form1->CheckBox1->Checked || Form1->CheckBox2->Checked || Form1->CheckBox3->Checked || Form1->CheckBox4->Checked) {
-					//верх и лево: если выбрано (1, 1), то не выполнять обмен со средой
+					//РІРµСЂС… Рё Р»РµРІРѕ: РµСЃР»Рё РІС‹Р±СЂР°РЅРѕ (1, 1), С‚Рѕ РЅРµ РІС‹РїРѕР»РЅСЏС‚СЊ РѕР±РјРµРЅ СЃРѕ СЃСЂРµРґРѕР№
 					if ((Form1->CheckBox1->Checked) && !(Form1->CheckBox2->Checked) && (Form1->CheckBox3->Checked)) {
 						if ((i == 1)&&(j == 1))
 						{
 							T1[i][j] = T0[i][j] + (Ld*dt/(C*po)*(Ch2+Ch4));
 						}
 					}
-					//верх и право
+					//РІРµСЂС… Рё РїСЂР°РІРѕ
 					if ((Form1->CheckBox1->Checked) && (Form1->CheckBox2->Checked) && !(Form1->CheckBox3->Checked))
 					{
 						if ((i == 1)&&(j == 41))
 						{
-							T1[i][j] = T0[i][j] + (Ld*dt/(C*po)*(Ch2+Ch3));
+							if (matMode == 1) {
+							   T1[i][j] = T0[i][j] + (Ld*dt/(C2*po2)*(Ch2+Ch3));
+							}  else {
+								T1[i][j] = T0[i][j] + (Ld*dt/(C*po)*(Ch2+Ch3));
+							}
 						}
 					}
-					//низ и лево
+					//РЅРёР· Рё Р»РµРІРѕ
 					if (!(Form1->CheckBox2->Checked) && (Form1->CheckBox3->Checked) && (Form1->CheckBox4->Checked))
 					{
 						if ((j == 1)&&(i == 41))
@@ -178,36 +193,48 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 							T1[i][j] = T0[i][j] + (Ld*dt/(C*po)*(Ch1+Ch4));
 						}
 					}
-					//низ и право
+					//РЅРёР· Рё РїСЂР°РІРѕ
 					if (!(Form1->CheckBox2->Checked) && (Form1->CheckBox3->Checked) && (Form1->CheckBox4->Checked))
 					{
-						if ((j == 1)&&(i == 41))
+						if ((j == 41)&&(i == 41))
 						{
-							T1[i][j] = T0[i][j] + (Ld*dt/(C*po)*(Ch1+Ch3));
+							if (matMode == 1) {
+								T1[i][j] = T0[i][j] + (Ld*dt/(C2*po2)*(Ch1+Ch3));
+							} else {
+								T1[i][j] = T0[i][j] + (Ld*dt/(C*po)*(Ch1+Ch3));
+							}
 						}
 					}
-					//верх
+					//РІРµСЂС…
 					if ((Form1->CheckBox1->Checked) && !(Form1->CheckBox2->Checked) && !(Form1->CheckBox3->Checked)) {
 						if (i == 1) {
-							T1[i][j] = T0[i][j] + (Ld*dt/(C*po)*(Ch2+Ch3+Ch4));
+							if ((j > 20) && (matMode == 1)) {
+								T1[i][j] = T0[i][j] + (Ld*dt/(C2*po2)*(Ch2+Ch3+Ch4));
+							} else {
+								T1[i][j] = T0[i][j] + (Ld*dt/(C*po)*(Ch2+Ch3+Ch4));
+							}
 					  }
 					}
-					//низ
+					//РЅРёР·
 					if (!(Form1->CheckBox2->Checked) && !(Form1->CheckBox3->Checked) && (Form1->CheckBox4->Checked)) {
 						if (i == 41) {
-							T1[i][j] = T0[i][j] + (Ld*dt/(C*po)*(Ch1+Ch3+Ch4));
+							if ((j > 20) && (matMode == 1)) {
+								T1[i][j] = T0[i][j] + (Ld*dt/(C2*po2)*(Ch1+Ch3+Ch4));
+							} else {
+								T1[i][j] = T0[i][j] + (Ld*dt/(C*po)*(Ch1+Ch3+Ch4));
+							}
 					  }
 					}
-					//лево
+					//Р»РµРІРѕ
 					if (!(Form1->CheckBox1->Checked) && (Form1->CheckBox3->Checked) && !(Form1->CheckBox4->Checked)) {
 						if (j == 1) {
 							T1[i][j] = T0[i][j] + (Ld*dt/(C*po)*(Ch2+Ch1+Ch4));
-					  }
+					    }
 					}
-					//право
+					//РїСЂР°РІРѕ
 					if (!(Form1->CheckBox1->Checked) && (Form1->CheckBox2->Checked) && !(Form1->CheckBox4->Checked)) {
 						if (j == 41) {
-							T1[i][j] = T0[i][j] + (Ld*dt/(C*po)*(Ch2+Ch1+Ch3));
+							T1[i][j] = T0[i][j] + (Ld*dt/(C2*po2)*(Ch2+Ch1+Ch3));
 					  }
 					}
 				}
@@ -221,7 +248,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		{
 			if (SelectTime != -1) {
 				if ((SelectTime <= it+dt)&&(SelectTime >= it-dt)) {
-					output << it << " секунда:"<< endl;
+					output << it << " СЃРµРєСѓРЅРґР°:"<< endl;
 					 for (i = 0; i <= (n+1); i++)
 					{
 						for (j = 0; j <= (m+1); j++)
@@ -232,7 +259,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 			}  else
 				{
 					if ((to-dt <= it)&&(it <= tv+dt)) {
-							output << it << " секунда:"<< endl;
+							output << it << " СЃРµРєСѓРЅРґР°:"<< endl;
 						 for (i = 0; i <= (n+1); i++)
 						{
 							for (j = 0; j <= (m+1); j++)
@@ -248,7 +275,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	}
 	output.close();
 	Timer1->Enabled = true;
-	Memo1->Lines->Append("Результаты успешно записаны в файл!");
+	Memo1->Lines->Append("Р РµР·СѓР»СЊС‚Р°С‚С‹ СѓСЃРїРµС€РЅРѕ Р·Р°РїРёСЃР°РЅС‹ РІ С„Р°Р№Р»!");
 	//system("output.txt");
 //---------------------------------------------------------------------------
 
@@ -330,10 +357,10 @@ void __fastcall TForm1::Button5Click(TObject *Sender)
 	iii[i1] = StrToFloat(Form1->Edit12->Text);
 	jjj[i1] = StrToFloat(Form1->Edit13->Text);
 	T0[iii[i1]][jjj[i1]] = StrToFloat(Form1->Edit14->Text);
-	Memo1->Lines->Append("Вы добавили источник в точке ("+FloatToStr(iii[i1])+", "+FloatToStr(jjj[i1])+") c температурой равной "+FloatToStr(T0[iii[i1]][jjj[i1]]) + ".");
+	Memo1->Lines->Append("Р’С‹ РґРѕР±Р°РІРёР»Рё РёСЃС‚РѕС‡РЅРёРє РІ С‚РѕС‡РєРµ ("+FloatToStr(iii[i1])+", "+FloatToStr(jjj[i1])+") c С‚РµРјРїРµСЂР°С‚СѓСЂРѕР№ СЂР°РІРЅРѕР№ "+FloatToStr(T0[iii[i1]][jjj[i1]]) + ".");
 	if (i1 == 9) {
-		ShowMessage("Вы добавили слишком много источников. Со следующим добавлением начнется перезапись данных об источниках.");
-		//Memo1->Lines->Append("Вы добавили слишком много источников. Со следующим добавлением начнется перезапись данных о источниках.");
+		ShowMessage("Р’С‹ РґРѕР±Р°РІРёР»Рё СЃР»РёС€РєРѕРј РјРЅРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєРѕРІ. РЎРѕ СЃР»РµРґСѓСЋС‰РёРј РґРѕР±Р°РІР»РµРЅРёРµРј РЅР°С‡РЅРµС‚СЃСЏ РїРµСЂРµР·Р°РїРёСЃСЊ РґР°РЅРЅС‹С… РѕР± РёСЃС‚РѕС‡РЅРёРєР°С….");
+		//Memo1->Lines->Append("Р’С‹ РґРѕР±Р°РІРёР»Рё СЃР»РёС€РєРѕРј РјРЅРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєРѕРІ. РЎРѕ СЃР»РµРґСѓСЋС‰РёРј РґРѕР±Р°РІР»РµРЅРёРµРј РЅР°С‡РЅРµС‚СЃСЏ РїРµСЂРµР·Р°РїРёСЃСЊ РґР°РЅРЅС‹С… Рѕ РёСЃС‚РѕС‡РЅРёРєР°С….");
 	}
 	if (i1 < 9) {
 		i1++;
@@ -346,13 +373,21 @@ void __fastcall TForm1::Button5Click(TObject *Sender)
 
 void __fastcall TForm1::RadioButton3Click(TObject *Sender)
 {
-	Panel7.Visible = false;
+	Panel7->Visible = false;
+    matMode = 0;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::RadioButton4Click(TObject *Sender)
 {
-	Panel7.Visible = true;
+	Panel7->Visible = true;
+    matMode = 1;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Edit17Change(TObject *Sender)
+{
+
 }
 //---------------------------------------------------------------------------
 
