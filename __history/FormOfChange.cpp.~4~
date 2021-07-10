@@ -1,0 +1,33 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "FormOfChange.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TForm3 *Form3;
+extern double T0[50][50];
+extern int iii, jjj;
+//---------------------------------------------------------------------------
+__fastcall TForm3::TForm3(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::Button1Click(TObject *Sender)
+{
+	Form1->iii = StrToFloat(Form3->Edit1->Text);
+	Form1->jjj = StrToFloat(Form3->Edit2->Text);
+	Form1->T0[iii][jjj] = StrToFloat(Form3->Edit3->Text);
+	Memo1->Lines->Append("Результаты успешно записаны в файл!");
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm3::FormCreate(TObject *Sender)
+{
+	Form1->Memo1->Clear();
+}
