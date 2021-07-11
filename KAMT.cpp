@@ -229,7 +229,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 					if (!(Form1->CheckBox1->Checked) && (Form1->CheckBox3->Checked) && !(Form1->CheckBox4->Checked)) {
 						if (j == 1) {
 							T1[i][j] = T0[i][j] + (Ld*dt/(C*po)*(Ch2+Ch1+Ch4));
-					    }
+						}
 					}
 					//право
 					if (!(Form1->CheckBox1->Checked) && (Form1->CheckBox2->Checked) && !(Form1->CheckBox4->Checked)) {
@@ -252,7 +252,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 					 for (i = 0; i <= (n+1); i++)
 					{
 						for (j = 0; j <= (m+1); j++)
-							output << T1[i][j] << " ";
+							output << to_string(T1[i][j]) << " ";
 						output << endl;
 					}
 				}
@@ -263,7 +263,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 						 for (i = 0; i <= (n+1); i++)
 						{
 							for (j = 0; j <= (m+1); j++)
-								output << T1[i][j] << " ";
+								output << to_string(T1[i][j])  << " ";
 							output << endl;
 						}
 					}
@@ -384,4 +384,5 @@ void __fastcall TForm1::RadioButton4Click(TObject *Sender)
     matMode = 1;
 }
 //---------------------------------------------------------------------------
+
 

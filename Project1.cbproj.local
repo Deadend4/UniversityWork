@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.240,=C:\Users\vista\Desktop\Каталог\Курсовая 2.0\Unit2.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.834,C:\Users\vista\Desktop\Каталог\Курсовая 2.0\Unit2.dfm=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.683,=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.896,=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.739,C:\Users\Home\Documents\Embarcadero\Studio\Projects\KAMT.cpp=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Курсовая 2.0\KAMT.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.739,C:\Users\Home\Documents\Embarcadero\Studio\Projects\KAMT.h=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Курсовая 2.0\KAMT.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.739,C:\Users\Home\Documents\Embarcadero\Studio\Projects\Курсовая 2.0\KAMT.h=C:\Users\Home\Documents\Embarcadero\Studio\Projects\KAMT.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.739,C:\Users\Home\Documents\Embarcadero\Studio\Projects\Курсовая 2.0\KAMT.dfm=C:\Users\Home\Documents\Embarcadero\Studio\Projects\KAMT.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.468,C:\Users\Home\Documents\Embarcadero\Studio\Projects\KAMT.cpp=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.213,=C:\Users\vista\Desktop\Каталог\Курсовая 2.0\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.841,C:\Users\vista\Desktop\Каталог\Курсовая 2.0\Unit2.cpp=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.175,=C:\Users\vista\Desktop\Курсовая 2.0\FormOfChange.cpp</Transaction>
     <Transaction>1899.12.30 00:00:00.000.345,=C:\Users\vista\Desktop\Каталог\Курсовая 2.0\Unit2.obj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.841,C:\Users\vista\Desktop\Каталог\Курсовая 2.0\Unit2.cpp=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.213,=C:\Users\vista\Desktop\Каталог\Курсовая 2.0\Unit2.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.240,=C:\Users\vista\Desktop\Каталог\Курсовая 2.0\Unit2.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.468,C:\Users\Home\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Home\Documents\Embarcadero\Studio\Projects\KAMT.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.739,C:\Users\Home\Documents\Embarcadero\Studio\Projects\KAMT.dfm=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Курсовая 2.0\KAMT.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.238,=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Unit2.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.884,=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.734,=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.468,C:\Users\Home\Documents\Embarcadero\Studio\Projects\Unit1.cpp=C:\Users\Home\Documents\Embarcadero\Studio\Projects\KAMT.cpp</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.827,C:\Users\vista\Desktop\Каталог\Курсовая 2.0\Unit2.h=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.260,=C:\Users\vista\Desktop\Каталог\Курсовая 2.0\Unit2.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.468,C:\Users\Home\Documents\Embarcadero\Studio\Projects\Unit1.h=C:\Users\Home\Documents\Embarcadero\Studio\Projects\KAMT.h</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.698,C:\Users\Home\Documents\Embarcadero\Studio\Projects\Project1.cbproj=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Курсовая 2.0\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.739,C:\Users\Home\Documents\Embarcadero\Studio\Projects\Курсовая 2.0\KAMT.cpp=C:\Users\Home\Documents\Embarcadero\Studio\Projects\KAMT.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.896,=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
     <Transaction>1899.12.30 00:00:00.000.672,C:\Users\Home\Documents\Embarcadero\Studio\Projects\Project1.cbproj=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.468,C:\Users\Home\Documents\Embarcadero\Studio\Projects\KAMT.dfm=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.238,=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Unit2.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.734,=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.884,=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.683,=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.468,C:\Users\Home\Documents\Embarcadero\Studio\Projects\KAMT.h=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.260,=C:\Users\vista\Desktop\Каталог\Курсовая 2.0\Unit2.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.827,C:\Users\vista\Desktop\Каталог\Курсовая 2.0\Unit2.h=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.698,C:\Users\Home\Documents\Embarcadero\Studio\Projects\Курсовая 2.0\Project1.cbproj=C:\Users\Home\Documents\Embarcadero\Studio\Projects\Project1.cbproj</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="..\..\Учеба"/>
