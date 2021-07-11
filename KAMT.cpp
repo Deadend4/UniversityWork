@@ -22,6 +22,19 @@ double T0[50][50];
 int iii[10], jjj[10];
 using namespace std;
 //---------------------------------------------------------------------------
+void fileWrite(double arr[50][50], double time, int n1, int m1)
+{
+	std::ofstream output;
+	output.open("output.txt", std::ios_base::app);
+	output << time << " секунда:"<< endl;
+	for (int i = 0; i <= (n1+1); i++)
+		{
+			for (int j = 0; j <= (m1+1); j++)
+				output << to_string(arr[i][j])  << " ";
+			output << endl;
+		}
+    output.close();
+}
 double gamm(double Tg)
 {
 	double rez, k = 0.9;
@@ -102,13 +115,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 	m = 41;
 	T0[ii][jj] = StrToInt(Form1->Edit15->Text); //278
 			if ((to == 0)&&(SelectTime==-1)) {
-			output << to << " секунда:"<< endl;
-			for (i = 0; i <= (n+1); i++)
-			{
-				for (j = 0; j <= (m+1); j++)
-					output << T0[i][j] << " ";
-				output << endl;
-			}
+				fileWrite(T1, it, n, m);
 		}
 	Memo1->Lines->Append("Точка ("+IntToStr(ii)+", "+IntToStr(jj)+") поджигается тепловым импульсом и повышает температуру на "+T0[ii][jj]+" градусов.");
 	if (SelectTime >= 0 ) {
@@ -248,24 +255,12 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 		{
 			if (SelectTime != -1) {
 				if ((SelectTime <= it+dt)&&(SelectTime >= it-dt)) {
-					output << it << " секунда:"<< endl;
-					 for (i = 0; i <= (n+1); i++)
-					{
-						for (j = 0; j <= (m+1); j++)
-							output << to_string(T1[i][j]) << " ";
-						output << endl;
-					}
+					fileWrite(T1, it, n, m);
 				}
 			}  else
 				{
 					if ((to-dt <= it)&&(it <= tv+dt)) {
-							output << it << " секунда:"<< endl;
-						 for (i = 0; i <= (n+1); i++)
-						{
-							for (j = 0; j <= (m+1); j++)
-								output << to_string(T1[i][j])  << " ";
-							output << endl;
-						}
+						fileWrite(T1, it, n, m);
 					}
 				}
 		}
@@ -300,7 +295,7 @@ void __fastcall TForm1::Button3Click(TObject *Sender)
 
 void __fastcall TForm1::Button4Click(TObject *Sender)
 {
-    system("output.txt");
+	system("output.txt");
 }
 //---------------------------------------------------------------------------
 
